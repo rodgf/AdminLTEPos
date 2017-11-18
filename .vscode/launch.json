@@ -1,0 +1,20 @@
+//PHP2
+{
+  "version": "0.2.0",
+  "compounds": [{
+    "name": "Launch & Debug",
+    "configurations": ["Listen for XDebug", "Launch localhost"]
+  }],
+  "configurations": [{
+    "name": "Listen for XDebug",
+    "type": "php",
+    "request": "launch",
+    "port": 9000
+  }, {
+    "name": "Launch localhost",
+    "type": "edge",
+    "request": "launch",
+    "url": "http://localhost:8081/AdminLTEPos/?XDEBUG_SESSION_START=qq",
+    "webRoot": "${workspaceRoot}"
+  }]
+}
