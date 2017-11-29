@@ -1,12 +1,9 @@
 <?php
   include "../../library/config.php";
-  ?>
-  <?php
-  $titlepage = "Login Form System";
-  ?>
-  <?php
+
+  $titlepage = "System Login Form";
   include "../layout/top-header.php"; //header template 
-  ?> 
+?> 
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
@@ -36,22 +33,24 @@
         <div class="information-box round">
           <div class="callout callout-danger">
             <?php
-  if (!empty($_GET['error'])) {
-      if ($_GET['error'] == 1) {
-          echo 'Please fill out username or password';
-      } else if ($_GET['error'] == 2) {
-          echo 'Please fill out username';
-      } else if ($_GET['error'] == 3) {
-          echo 'Please fill out password';
-      } else if ($_GET['error'] == 4) {
-          echo 'Invalid email or password';
-      } else if ($_GET['error'] == 'session_die') {
-          echo 'Your login session is over!!, please sign in again';
-      }
-  } else {
-      echo 'Please fill out your username and password to sign in';
-  }
-?>
+              if (!empty($_GET['error'])) {
+                  if ($_GET['error'] == 0) {
+                    echo 'Erro ao verificar usuário: ' . $_GET['msgErro'];
+                  } else if ($_GET['error'] == 1) {
+                    echo 'Please fill out username or password';
+                  } else if ($_GET['error'] == 2) {
+                    echo 'Please fill out username';
+                  } else if ($_GET['error'] == 3) {
+                      echo 'Please fill out password';
+                  } else if ($_GET['error'] == 4) {
+                      echo 'Invalid email or password';
+                  } else if ($_GET['error'] == 'session_die') {
+                      echo 'Your login session is over!!, please sign in again';
+                  }
+              } else {
+                  echo 'Please fill out your username and password to sign in';
+              }
+            ?>
         </div>
       </div>
     </div><!-- /.login-box-body -->

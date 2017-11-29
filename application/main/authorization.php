@@ -16,18 +16,22 @@
       header('location:login.php?error=3');
       break;
   }
-  $sv   = new pos();
+  $sv = new pos();
   $data = $sv->getLogin($username, $password);
   if ($data[2] == 1) {
       $_SESSION['pos_username'] = $username;
       $_SESSION['pos_id']       = $data[1]['id_user'];
       $_SESSION['pos_h_menu']   = $data[1]['h_menu'];
       $_SESSION['pos_uniqid']   = uniqid();
-      $_SESSION['name_shop']    = $data[1]['name_shop'];
+      //$_SESSION['name_shop']    = $data[1]['name_shop'];
       $iduser                   = $_SESSION['pos_id'];
       //$sv->deleteTempSaleByUser($iduser);
       header('location:../main/index.php');
   } else {
+    if ($data[2] == 0) {
+      header('location:login.php?error=0&msgErro=' . $data[1]);
+    } else {
       header('location:login.php?error=4');
+    }
   }
 ?>
