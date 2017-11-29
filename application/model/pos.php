@@ -1,6 +1,6 @@
 <?php
 class pos extends dbconn {
-  public function __construct()   {
+  public function __construct() {
     $this->initDBO();
   }
 
