@@ -1,10 +1,10 @@
 
-  <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+  <script src="../..//bower_components/jquery/dist/jQuery.min.js"></script>
   <script src="../../plugins/jQueryUI/jquery-ui.min.js"></script>
   <script>
     $.widget.bridge('uibutton', $.ui.button);
   </script>
-  <script src="../../bootstrap/js/bootstrap.min.js"></script>
+  <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
   <script src="../../plugins/fastclick/fastclick.min.js"></script>
   <script src="../../plugins/input-mask/jquery.inputmask.js"></script>

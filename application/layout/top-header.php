@@ -19,9 +19,9 @@ session_start();
       echo '';
     }?></title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../dist/font-awesome-4.5.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="../../dist/ionic/css/ionicons.min.css">
+  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../bower_components/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="../../dist/css/responsive.dataTables.min.css">

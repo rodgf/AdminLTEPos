@@ -48,4 +48,54 @@ class pos extends dbconn {
       return $stat;
     }
   }
+
+  /******************************************************************************
+  START OF pos MENU CODE
+   *******************************************************************************/
+  public function getMenu() {
+    $db = $this->dblocal;
+    try {
+      $stmt = $db->prepare("select * from r_menu order by menu_order");
+      $stmt->execute();
+      $stat[0] = true;
+      $stat[1] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $stat;
+    } catch (PDOException $ex) {
+      $stat[0] = false;
+      $stat[1] = $ex->getMessage();
+      return $stat;
+    }
+  }
+
+  public function getSubMenu($id) {
+    $db = $this->dblocal;
+    try {
+      $stmt = $db->prepare("select * from r_menu_sub where id_menu = :id order by sub_menu_order asc");
+      $stmt->bindParam("id", $id);
+      $stmt->execute();
+      $stat[0] = true;
+      $stat[1] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $stat;
+    } catch (PDOException $ex) {
+      $stat[0] = false;
+      $stat[1] = $ex->getMessage();
+      return $stat;
+    }
+  }
+
+  public function getrefsytem() {
+    $db = $this->dblocal;
+    try {
+      $stmt = $db->prepare("select a.* from r_ref_system a where id = 1 ");
+      $stmt->execute();
+      $stat[0] = true;
+      $stat[1] = $stmt->fetch(PDO::FETCH_ASSOC);
+      return $stat;
+    } catch (PDOException $ex) {
+      $stat[0] = false;
+      $stat[1] = $ex->getMessage();
+      $stat[2] = 0;
+      return $stat;
+    }
+  }
 }
