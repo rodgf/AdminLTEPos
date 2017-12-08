@@ -16,6 +16,6 @@
   <script src="../../dist/js/sweetalert.min.js" type="text/javascript"></script>
   <script src="../../dist/js/session_checker.js" type="text/javascript"></script>
   <script src="../../dist/js/hotkey.js"></script>
-  <script src="../../dist/js/jquery.dataTables.min.js"></script>
+  <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../dist/js/dataTables.bootstrap.min.js"></script>
   <script src="../../dist/js/dataTables.responsive.min.js"></script>
