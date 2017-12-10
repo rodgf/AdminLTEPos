@@ -1,5 +1,6 @@
 <?php
   session_start();
+  
   require_once("../model/dbconn.php");
   require_once("../model/pos.php");
 

@@ -1,7 +1,9 @@
 <?php
   session_start();
+
   require_once "../model/dbconn.php";
   require_once "../model/pos.php";
+
   $method = $_POST['method'];
   if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')) {
     $pos = new pos();
@@ -20,7 +22,6 @@
       $data = $array[1];
       $i = 0;
       foreach ($data as $key) {
-
         $data[$i]['button'] = '
           <button type="submit" id_user="' . $key['id_user'] . '" class="btn btn-warning btnpass  btn-sm" id="btnpass' . $key['id_user'] . '"  ><i class="fa fa-key"></i>
           </button>

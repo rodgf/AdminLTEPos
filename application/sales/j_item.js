@@ -1,11 +1,4 @@
 //
-$(document).on("click", "#btnadd", function() {
-  $(".contentharga").remove();
-  $("#modalmasteritem").modal('show');
-  newitem();
-});
-
-//
 function newitem() {
   $("#txtiditem").val("*New");
   $("#txtname").val("");
@@ -16,6 +9,13 @@ function newitem() {
   $("#txtunit").change();
   set_focus("#txtname");
 }
+
+//
+$(document).on("click", "#btnadd", function() {
+  $(".contentharga").remove();
+  $("#modalmasteritem").modal('show');
+  newitem();
+});
 
 //
 $(document).on("click", ".btnedit", function() {

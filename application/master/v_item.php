@@ -92,8 +92,8 @@
 	</div>
 
 
-	<?php include "../layout/footer.php"; //footer template ?> 
-	<?php include "../layout/bottom-footer.php"; //footer template ?> 
+	<?php include "../layout/footer.php"; 					//footer template ?> 
+	<?php include "../layout/bottom-footer.php"; 		//footer template ?> 
 	<script src="../sales/j_item.js"></script>
 
 </body>

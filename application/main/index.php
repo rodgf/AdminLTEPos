@@ -96,8 +96,8 @@
 		</div>
 	</section>
 
-	<?php include "../layout/footer.php"; //footer template ?> 
-	<?php include "../layout/bottom-footer.php"; //footer template ?> 
+	<?php include "../layout/footer.php"; 				//footer template ?> 
+	<?php include "../layout/bottom-footer.php"; 	//footer template ?> 
 
 	<script src="../../dist/js/redirect.js"></script>
 	<script>
