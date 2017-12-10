@@ -1,7 +1,7 @@
 <?php
   session_start();
-  require_once "../model /dbconn.php";
-  require_once "../model /pos.php";
+  require_once "../model/dbconn.php";
+  require_once "../model/pos.php";
 
   //
   function display_to_sql($date) {
@@ -42,7 +42,9 @@
             $btn = 'delete';
           } else {
             $html .= '<tr >';
-            $btn = '<button  type="submit" sale_id="' . $key['sale_id'] . '"  title="Delete Transaction" class="btn btn-danger btn-sm btndeletesale "  id="btndeletesale' . $key['sale_id'] . '" name=""  ><i class="fa fa-remove"></i></button>';
+            $btn = '<button  type="submit" sale_id="' . $key['sale_id'] .
+                   '" title="Delete Transaction" class="btn btn-danger btn-sm btndeletesale" id="btndeletesale' .
+                   $key['sale_id'] . '" name=""><i class="fa fa-remove"></i></button>';
           }
 
           $html .= '	<td class="tdstrike">' . $i . '</td>
@@ -117,7 +119,8 @@
         $retval['result'] = $update[0];
         $retval['error'] = $update[1];
       } else {
-        $insert = $pos->saveTempSale($kasir, $uniqid, $result['id_item'], $result['unit'], $result['item_name'], $result['qty'], $result['price'], $result['discprcn'], $result['discrp']);
+        $insert = $pos->saveTempSale($kasir, $uniqid, $result['id_item'], $result['unit'],
+          $result['item_name'], $result['qty'], $result['price'], $result['discprcn'], $result['discrp']);
         $retval['result'] = $insert[0];
         $retval['error'] = $insert[1];
       }
@@ -180,12 +183,17 @@
         $keys = $key['id_item'] . '|' . $key['unit'];
         $keys = base64_encode($keys);
         $total = ($key['price'] - ($key['price'] * $key['discprc'] / 100)) * $key['qty'];
-        $data[$i]['price'] = '<a href="#" class="editparam" key="' . $keys . '"  datatitle="Harga Sale" dataparam="hargajual" val="' . number_format($key['price']) . '">' . number_format($key['price']) . '</a>';
-        $data[$i]['qty'] = '<a href="#" class="editparam" key="' . $keys . '" datatitle="Qty" dataparam="qty" val="' . number_format($key['qty']) . '">' . number_format($key['qty']) . ' ' . $key['unit'] . '</a>';
+        $data[$i]['price'] = '<a href="#" class="editparam" key="' . $keys .
+                             '"  datatitle="Harga Sale" dataparam="hargajual" val="' . number_format($key['price']) . '">' .
+                             number_format($key['price']) . '</a>';
+        $data[$i]['qty'] = '<a href="#" class="editparam" key="' . $keys . '" datatitle="Qty" dataparam="qty" val="' .
+                           number_format($key['qty']) . '">' . number_format($key['qty']) . ' ' . $key['unit'] . '</a>';
         $data[$i]['discprc'] = '<a href="#" class="editparam" key="' . $keys . '" datatitle="Discount" dataparam="disc" val="' . number_format($key['discprc'], 2) . '">' . number_format($key['discprc'], 2) . '</a>';
 
         $data[$i]['subtotal'] = '<span class="csubtotal">' . number_format($total) . "</span>";
-        $data[$i]['button'] = '<button  type="submit" id_item="' . $key['id_item'] . '" unit="' . $key['unit'] . '"   class="btn btn-primary btndelete btn-sm"  id="btndeletes' . $key['id_item'] . '"   ><i class="fa fa-remove"></i></button>';
+        $data[$i]['button'] = '<button  type="submit" id_item="' . $key['id_item'] . '" unit="' . $key['unit'] .
+                              '"   class="btn btn-primary btndelete btn-sm"  id="btndeletes' . $key['id_item'] .
+                              '"   ><i class="fa fa-remove"></i></button>';
         $i++;
       }
       $datax = array('data' => $data);

@@ -33,7 +33,7 @@
                     <th style="width:60px">Qty</th>
                     <th style="width:60px">Disc %</th>
                     <th style="width:120px">Total</th>
-                    <th style="width:px"></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody></tbody>
@@ -47,7 +47,8 @@
       <div class="col-md-4">
         <div class="box box-danger">
           <div class="box-header with-border">
-            <button type="submit" title="Reset / cancel transaction" class="btn btn-primary bg-navy" id="btncancel"><i class="fa fa-remove"></i> Reset</button>
+            <button type="submit" title="Reset / cancel transaction" class="btn btn-primary bg-navy"
+                      id="btncancel"><i class="fa fa-remove"></i> Reset</button>
           </div>
 
           <div class="box-body">
@@ -117,7 +118,7 @@
             <div class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
-                  <label class="col-sm-12" control-label="">
+                  <label class="col-sm-12 control-label">
 								<button type="submit" title="Payment (F9)" class="btn btn-primary btn-success btn-block btnpayment" id="btnpayment" >
 									<i class="fa fa-shopping-cart"></i>[F9] Proccess Payment
 								</button>
@@ -144,7 +145,7 @@
           <div class="form-horizontal">
             <div class="box-body">
               <div class="form-group">
-                <label class="col-sm-12" control-label="">
+                <label class="col-sm-12 control-label">
 								<input type="text" class="form-control money textright" id="txtvalue" name="txtvalue"  >
 								<input type="hidden" id="txtdataparam" >
 								<input type="hidden" id="txtkey">
@@ -227,13 +228,15 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-12" control-label "=" "><hr></label>  </div><div class="form-group ">   <label class="col-sm-12 " control-label"=""><span style="color:white;background-color:red;padding:5px;">* Please double check the transaction before making the payment process </span>
+                <label class="col-sm-12 control-label"></label><hr /></div><div class="form-group ">
+                <label class="col-sm-12 control-label"><span style="color:white;background-color:red;padding:5px;">* Please double check the transaction before making the payment process </span>
                 </label>
               </div>
               <div class="form-group">
                 <label class="col-sm-4  control-label"></label>
                 <div class="col-sm-8">
-                  <button type="submit" title="Save Transaction ?" class="btn btn-primary pull-right" id="btnsavetrans"><i class="fa fa-save"></i> Proccess</button>
+                  <button type="submit" title="Save Transaction ?" class="btn btn-primary pull-right"
+                          id="btnsavetrans"><i class="fa fa-save"></i> Proccess</button>
                 </div>
               </div>
               <div class="form-group">
@@ -265,7 +268,8 @@
             <label for="Periode">Period : </label>
             <input readonly="" type="text" class="form-control txtperiode tgl" id="txtfirstperiod" value="20-04-2017" style="width:100px "> -
             <input readonly="" type="text" class="form-control txtperiode tgl" id="txtlastperiod" value="20-04-2017" style="width:100px ">
-            <button type="submit" title="Search transaction" class="btn btn-primary " id="btnfiltersale"><i class="fa fa-refresh"></i> Search</button>
+            <button type="submit" title="Search transaction" class="btn btn-primary "
+                    id="btnfiltersale"><i class="fa fa-refresh"></i> Search</button>
           </div>
           <hr>
           <div class="box-body table-responsive no-padding">
@@ -277,7 +281,7 @@
                   <th style="width:87px">Id Trx</th>
                   <th style="width:100px">Total</th>
                   <th style="width:80px">Cashier</th>
-                  <th style="width:px"></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -304,7 +308,7 @@
           <div class="form-horizontal">
             <div class="box-body">
               <div class="form-group">
-                <label class="col-sm-12" control-label "=" "><span id="ketpassword ">Type password before edit transaction</span></label>  </div><div class="form-group ">   <label class="col-sm-12 " control-label"="">
+                <label class="col-sm-12 control-label"><span id="ketpassword ">Type password before edit transaction</span></label>  </div><div class="form-group ">   <label class="col-sm-12 control-label">
                 <input type="password" class="form-control " id="txtpass" name="txtpass">
                 <input type="hidden" id="txthidetrxid">
                 <input type="hidden" id="txthiddentrans">
@@ -326,13 +330,12 @@
     </div>
   </div>
 
-  <?php include "../layout/footer.php"; //footer template ?>
-  <?php include "../layout/bottom-footer.php"; //footer template ?>
+  <?php include "../layout/footer.php";         //footer template ?>
+  <?php include "../layout/bottom-footer.php";  //footer template ?>
 
   <script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
   <script src="../../dist/js/redirect.js"></script>
   <script src="j_pos.js"></script>
 
   </body>
-
   </html>

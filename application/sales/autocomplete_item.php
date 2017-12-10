@@ -1,7 +1,7 @@
 <?php
   session_start();
-  require _once("../model/dbconn.php");
-  require _once("../model/pos.php");
+  require_once("../model/dbconn.php");
+  require_once("../model/pos.php");
 
   $term = trim(strip_tags($_GET['term']));
   $row_set = array();

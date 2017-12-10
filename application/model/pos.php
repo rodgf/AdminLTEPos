@@ -84,6 +84,23 @@
       }
     }
 
+    public function getSubMenuById($menu) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("SELECT name_sub_menu FROM r_menu_sub WHERE id_sub_menu= :menu");
+
+        $stmt->bindParam("menu",$menu);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = $stmt->fetchColumn(0);
+        return $stat;
+      } catch(PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
     //
     public function getrefsytem() {
       $db = $this->dblocal;

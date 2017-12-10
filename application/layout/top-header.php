@@ -34,4 +34,4 @@
   <link rel="stylesheet" href="../../dist/css/responsive.dataTables.min.css">
   <link rel="stylesheet" href="../../dist/css/sweetalert.css">
   <link rel="stylesheet" href="../../dist/css/custom.css">
-  <link rel="shortcut icon" href="../../dist/img/favicon.ico" />
+<!--  <link rel="shortcut icon" href="../../dist/img/favicon.ico" /> -->

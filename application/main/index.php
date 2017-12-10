@@ -1,6 +1,7 @@
-<?php include "../../library/config.php"; ?>
-<?php $titlepage="Dashboard"; ?>
 <?php
+  include "../../library/config.php";
+  $titlepage="Dashboard";
+
   require_once("../model/dbconn.php");
   require_once("../model/pos.php");
   include "../layout /top-header.php"; 
@@ -119,5 +120,6 @@
 			});
 		});
 	</script>
+
 </body>
 </html>

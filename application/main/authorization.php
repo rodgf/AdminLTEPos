@@ -1,5 +1,6 @@
 <?php
   session_start();
+
   include "../../library/config.php";
   require_once("../model/dbconn.php"); // delete white space between require_ once
   require_once("../model/pos.php"); // delete white space between require_ once
@@ -8,14 +9,12 @@
   $password = $_POST['password'];
   if (empty($username) && empty($password)) {
       header('location:login.php?error=1');
-      break;
   } else if (empty($username)) {
       header('location:login.php?error=2');
-      break;
   } else if (empty($password)) {
       header('location:login.php?error=3');
-      break;
   }
+
   $sv = new pos();
   $data = $sv->getLogin($username, $password);
   if ($data[2] == 1) {

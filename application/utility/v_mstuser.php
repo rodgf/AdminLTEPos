@@ -1,6 +1,7 @@
 <?php 
   $titlepage="Master User";
   $idsmenu=3;
+
   include "../../library/config.php";
   require_once("../model/dbconn.php");
   require_once("../model/pos.php");
@@ -77,7 +78,8 @@
                 $menuku .= '<ul class="list-group">'; 
                 foreach ($submenuk[1] as $keys) {
                   $menuku .= '<li class="list-group-item">
-                  <input type="checkbox"  id="check-'.$keys["id_sub_menu"].'" class="chkbox" value="'.$keys['id_sub_menu'].'" > <strong>'.$keys['name_sub_menu'].'</strong>
+                  <input type="checkbox"  id="check-'.$keys["id_sub_menu"].'" class="chkbox"
+                    value="'.$keys['id_sub_menu'].'" > <strong>'.$keys['name_sub_menu'].'</strong>
                   </li>'; 
                 }
                 $menuku .= '</ul>'; 
@@ -87,7 +89,8 @@
                 $submenuk = $pos->getSubMenu($key['id_menu']);
                 $menuku .= '<ul class="list-group">'; 
                 foreach ($submenuk[1] as $keys) {
-                  $menuku .= '<li class="list-group-item"><input type="checkbox" id="check-'.$keys["id_sub_menu"].'" class="chkbox" value="'.$keys['id_sub_menu'].'" > <strong>'.$keys['name_sub_menu'].'</strong></li>'; 
+                  $menuku .= '<li class="list-group-item"><input type="checkbox" id="check-'.$keys["id_sub_menu"].'"
+                    class="chkbox" value="'.$keys['id_sub_menu'].'" > <strong>'.$keys['name_sub_menu'].'</strong></li>';
                 }
                 $menuku .= '</ul>';
                 $menuku .= '</div>';

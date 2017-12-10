@@ -8,7 +8,7 @@ function temptabel(idbrg) {
     url: "c_pos.php",
     type: "POST",
     data: value,
-    success: function(data, textStatus, jqXHR) {
+    success: function (data, textStatus, jqXHR) {
       var data = jQuery.parseJSON(data);
       if (data.result == 1) {
         var table = $('#table_transaction').DataTable();
@@ -21,12 +21,12 @@ function temptabel(idbrg) {
           message: "Error save item , error :" + data.error
         }, {
           type: 'danger',
-          delay: 10000,
+          delay: 10000
         });
       }
-
     },
-    error: function(jqXHR, textStatus, errorThrown) {}
+    error: function (jqXHR, textStatus, errorThrown) {
+    }
   });
 }
 
@@ -39,19 +39,20 @@ function refresh_total() {
     url: "c_pos.php",
     type: "POST",
     data: value,
-    success: function(data, textStatus, jqXHR) {
-      var data = jQuery.parseJSON(data);
-      var subtotal = data.subtotal;
+    success: function (result, textStatus, jqXHR) {
+      result = jQuery.parseJSON(result);
+      var subtotal = result.subtotal;
       $("#txtsubtotal").val(addCommas(subtotal));
       $("#txttotaldiscprc").blur();
       var discrp = cleanString($("#txttotaldiscrp").val());
       var total = addCommas(subtotal - discrp);
       $("#txttotal").html(total);
     },
-    error: function(jqXHR, textStatus, errorThrown) {}
+    error: function (jqXHR, textStatus, errorThrown) {
+    }
   });
 }
-$(document).bind('keydown', 'f9', function() {
+$(document).bind('keydown', 'f9', function () {
   $("#btnpayment").click();
 });
 
@@ -74,8 +75,8 @@ function reset_data() {
     url: "c_pos.php",
     type: "POST",
     data: value,
-    success: function(data, textStatus, jqXHR) {
-      var data = jQuery.parseJSON(data);
+    success: function (data, textStatus, jqXHR) {
+      data = jQuery.parseJSON(data);
       if (data.result == 1) {
         var table = $('#table_transaction').DataTable();
         table.ajax.reload(null, false);
@@ -91,11 +92,12 @@ function reset_data() {
           message: "Can not reset data, error :" + data.error
         }, {
           type: 'danger',
-          delay: 10000,
+          delay: 10000
         });
       }
     },
-    error: function(jqXHR, textStatus, errorThrown) {}
+    error: function (jqXHR, textStatus, errorThrown) {
+    }
   });
 }
 
@@ -110,9 +112,8 @@ function delete_trans(sale_id) {
     url: "c_pos.php",
     type: "POST",
     data: value,
-    success: function(data, textStatus, jqXHR) {
-
-      var data = jQuery.parseJSON(data);
+    success: function (data, textStatus, jqXHR) {
+      data = jQuery.parseJSON(data);
       if (data.result == true) {
         $("#btnfiltersale").click();
       } else {
@@ -120,19 +121,19 @@ function delete_trans(sale_id) {
           message: "Error delete transaction , Error : " + data.error
         }, {
           type: 'danger',
-          delay: 10000,
+          delay: 10000
         });
       }
       loading_stop();
     },
-    error: function(jqXHR, textStatus, errorThrown) {
+    error: function (jqXHR, textStatus, errorThrown) {
       loading_stop();
     }
   });
 }
 
 //
-$(document).on("click", '#btncheckpass', function() {
+$(document).on("click", '#btncheckpass', function () {
   var trx = $("#txthiddentrans").val();
   var id_sales = $("#txthidetrxid").val();
   if (id_sales == '' || id_sales == null) {
@@ -140,7 +141,7 @@ $(document).on("click", '#btncheckpass', function() {
       message: "No transaction processed"
     }, {
       type: 'warning',
-      delay: 5000,
+      delay: 5000
     });
     return;
   }
@@ -153,8 +154,8 @@ $(document).on("click", '#btncheckpass', function() {
     url: "../model/check_password.php",
     type: "POST",
     data: value,
-    success: function(data, textStatus, jqXHR) {
-      var data = jQuery.parseJSON(data);
+    success: function (data, textStatus, jqXHR) {
+      data = jQuery.parseJSON(data);
       if (data.auth == true) {
         $("#passwordmodal").modal("hide");
         $("#txtpass").val("");
@@ -164,20 +165,19 @@ $(document).on("click", '#btncheckpass', function() {
           message: "Password does not match"
         }, {
           type: 'danger',
-          delay: 10000,
+          delay: 10000
         });
         set_focus("#txtpass");
-        return;
       }
     },
-    error: function(jqXHR, textStatus, errorThrown) {
+    error: function (jqXHR, textStatus, errorThrown) {
       loading_stop();
     }
   });
 });
 
 //
-$(document).on("click", ".btndeletesale", function() {
+$(document).on("click", ".btndeletesale", function () {
   $("#passwordmodal").modal("show");
   $("#txthidetrxid").val($(this).attr("sale_id"));
   $("#txthiddentrans").val("D");
@@ -186,7 +186,7 @@ $(document).on("click", ".btndeletesale", function() {
 });
 
 //
-$(document).on("click", "#btnpayment", function() {
+$(document).on("click", "#btnpayment", function () {
   var id_trans = $("#txtidsales").val();
   var tgl_trans = $("#txtsalesdate").val();
 
@@ -195,7 +195,7 @@ $(document).on("click", "#btnpayment", function() {
       message: "Please fill out id transaction!"
     }, {
       type: 'warning',
-      delay: 10000,
+      delay: 10000
     });
     return;
   }
@@ -204,7 +204,7 @@ $(document).on("click", "#btnpayment", function() {
       message: "Please fill out transaction date!"
     }, {
       type: 'warning',
-      delay: 10000,
+      delay: 10000
     });
     return;
   }
@@ -215,17 +215,16 @@ $(document).on("click", "#btnpayment", function() {
     url: "c_pos.php",
     type: "POST",
     data: value,
-    success: function(data, textStatus, jqXHR) {
-      var data = jQuery.parseJSON(data);
+    success: function (data, textStatus, jqXHR) {
+      data = jQuery.parseJSON(data);
       if (data.tempsale == false) {
         $.notify({
           message: "No items have been selected in the shopping cart list!"
         }, {
           type: 'warning',
-          delay: 10000,
+          delay: 10000
         });
         set_focus("#txtsearchitem");
-        return;
       } else {
         var total = parseInt(cleanString($("#txttotal").html()));
         $("#txtinfoidtrans").val($("#txtidsales").val());
@@ -237,14 +236,14 @@ $(document).on("click", "#btnpayment", function() {
         set_focus("#txtmoneypay");
       }
     },
-    error: function(jqXHR, textStatus, errorThrown) {
-
+    error: function (jqXHR, textStatus, errorThrown) {
+      //
     }
   });
 });
 
 //
-$(document).on("blur", "#txtmoneypay", function() {
+$(document).on("blur", "#txtmoneypay", function () {
   var total = parseInt(cleanString($("#txttotal").html()));
   var paid = parseInt(cleanString($(this).val()));
   var returnchange = paid - total;
@@ -261,7 +260,7 @@ $(document).on("blur", "#txtmoneypay", function() {
 });
 
 //
-$(document).on("click", "#btnsavetrans", function() {
+$(document).on("click", "#btnsavetrans", function () {
   var sale_id = $("#txtidsales").val();
   var sale_date = $("#txtsalesdate").val();
   var paid = parseInt(cleanString($("#txtmoneypay").val()));
@@ -278,7 +277,7 @@ $(document).on("click", "#btnsavetrans", function() {
       confirmButtonText: "Purchase",
       closeOnConfirm: true
     },
-    function() {
+    function () {
       $("#btnsavetrans").prop('disabled', true);
       proccess_waiting("#infoproccesspayment");
       var value = {
@@ -294,29 +293,36 @@ $(document).on("click", "#btnsavetrans", function() {
         url: "c_pos.php",
         type: "POST",
         data: value,
-        success: function(data, textStatus, jqXHR) {
+        success: function (data, textStatus, jqXHR) {
           $("#btnsavetrans").prop('disabled', false);
           $("#infoproccesspayment").html("");
-          var data = jQuery.parseJSON(data);
+
+          data = jQuery.parseJSON(data);
           if (data.result == true) {
             var xid_sales = data.xid_sales;
             $("#modalpayment").modal('hide');
-            setTimeout(function() {
-              $.redirect("nota_jual.php", { id_sales: xid_sales, duplikasi: 0 }, 'POST', '_blank');
+            /*
+            setTimeout(function () {
+              $.redirect("nota_jual.php", {id_sales: xid_sales, duplikasi: 0}, 'POST', '_blank');
             }, 500); // After 420 ms
-
+            */
+            $.notify({
+              message: "Êxito."
+            }, {
+              type: 'info',
+              delay: 10000
+            });
             reset_data();
           } else {
             $.notify({
               message: "Error save transaction, error :" + data.error
             }, {
               type: 'danger',
-              delay: 10000,
+              delay: 10000
             });
           }
-
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           $("#infoproccesspayment").html("");
           $("#btnsavetrans").prop('disabled', false);
         }
@@ -325,27 +331,28 @@ $(document).on("click", "#btnsavetrans", function() {
 });
 
 //
-$(document).on("click", ".btndiscprc", function(e) {
+$(document).on("click", ".btndiscprc", function (e) {
   e.preventDefault();
   $("#txttotaldiscprc").prop('disabled', false);
   $("#txttotaldiscrp").prop('disabled', true);
   $("#txttotaldiscprc").focus();
 });
-$(document).on("click", ".btndiscrp", function(e) {
+$(document).on("click", ".btndiscrp", function (e) {
   e.preventDefault();
   $("#txttotaldiscrp").prop('disabled', false);
   $("#txttotaldiscprc").prop('disabled', true);
   $("#txttotaldiscrp").focus();
 });
-$(document).on("blur", "#txttotaldiscprc", function() {
+$(document).on("blur", "#txttotaldiscprc", function () {
   if (isNaN($(this).val())) {
     $(this).val(0);
   }
+  var prcn = 0;
   if ($(this).val() > 100 || $(this).val() < 0) {
     $(this).val(0);
-    var prcn = 0;
+    prcn = 0;
   } else {
-    var prcn = parseFloat($(this).val());
+    prcn = parseFloat($(this).val());
   }
   var subtotal = parseInt(cleanString($("#txtsubtotal").val()));
   var discrp = subtotal * (prcn / 100);
@@ -355,13 +362,14 @@ $(document).on("blur", "#txttotaldiscprc", function() {
 });
 
 //
-$(document).on("blur", "#txttotaldiscrp", function() {
+$(document).on("blur", "#txttotaldiscrp", function () {
   var subtotal = parseInt(cleanString($("#txtsubtotal").val()));
+  var discrp = 0;
   if (parseInt(cleanString($(this).val())) > subtotal || parseInt(cleanString($(this).val())) < 0) {
     $(this).val(0);
-    var discrp = 0;
+    discrp = 0;
   } else {
-    var discrp = parseInt(cleanString($(this).val()));
+    discrp = parseInt(cleanString($(this).val()));
   }
   var prcn = (discrp / subtotal) * 100;
   if (isNaN(prcn)) {
@@ -377,7 +385,7 @@ $(document).on("blur", "#txttotaldiscrp", function() {
 });
 
 //
-$(document).on("click", "#btnubahedit", function() {
+$(document).on("click", "#btnubahedit", function () {
   var nilai = cleanString($("#txtvalue").val());
   var jenis = $("#txtdataparam").val();
   var key = $("#txtkey").val();
@@ -392,8 +400,8 @@ $(document).on("click", "#btnubahedit", function() {
     url: "c_pos.php",
     type: "POST",
     data: value,
-    success: function(data, textStatus, jqXHR) {
-      var data = jQuery.parseJSON(data);
+    success: function (data, textStatus, jqXHR) {
+      data = jQuery.parseJSON(data);
       if (data.result == 1) {
         var table = $('#table_transaction').DataTable();
         table.ajax.reload(null, false);
@@ -404,16 +412,17 @@ $(document).on("click", "#btnubahedit", function() {
           message: "Error edit , error :" + data.error
         }, {
           type: 'danger',
-          delay: 10000,
+          delay: 10000
         });
       }
     },
-    error: function(jqXHR, textStatus, errorThrown) {}
+    error: function (jqXHR, textStatus, errorThrown) {
+    }
   });
 });
 
 //
-$(document).on("click", ".btndelete", function() {
+$(document).on("click", ".btndelete", function () {
   var id_item = $(this).attr("id_item");
   var value = {
     id_item: id_item,
@@ -423,8 +432,8 @@ $(document).on("click", ".btndelete", function() {
     url: "c_pos.php",
     type: "POST",
     data: value,
-    success: function(data, textStatus, jqXHR) {
-      var data = jQuery.parseJSON(data);
+    success: function (data, textStatus, jqXHR) {
+      data = jQuery.parseJSON(data);
       if (data.result == 1) {
         var table = $('#table_transaction').DataTable();
         table.ajax.reload(null, false);
@@ -434,16 +443,17 @@ $(document).on("click", ".btndelete", function() {
           message: "Error delete list item , error :" + data.error
         }, {
           type: 'danger',
-          delay: 10000,
+          delay: 10000
         });
       }
     },
-    error: function(jqXHR, textStatus, errorThrown) {}
+    error: function (jqXHR, textStatus, errorThrown) {
+    }
   });
 });
 
 //
-$(document).on("click", ".editparam", function() {
+$(document).on("click", ".editparam", function () {
   var dataparam = $(this).attr("dataparam");
   var datatitle = $(this).attr("datatitle");
   var val = $(this).attr("val");
@@ -452,25 +462,31 @@ $(document).on("click", ".editparam", function() {
   $("#modaleditparam").find(".modal-title").html(datatitle);
   $("#txtdataparam").val(dataparam);
   $("#txtvalue").val(val);
-  $("#txtkey").val(key)
+  $("#txtkey").val(key);
 
   $("#modaleditparam").modal("show");
   set_focus("#txtvalue");
 });
 
 //
-$(document).on("click", ".btnnota", function() {
+$(document).on("click", ".btnnota", function () {
   var idjual = $(this).attr("id_sales");
   var jnsjual = $(this).attr("jns_jual");
   if (jnsjual == 1) {
-    $.redirect("nota_jual.php", { id_sales: idjual, duplikasi: 1 }, 'POST', '_blank');
+    //$.redirect("nota_jual.php", {id_sales: idjual, duplikasi: 1}, 'POST', '_blank');
+    $.notify({
+      message: "Êxito."
+    }, {
+      type: 'info',
+      delay: 10000
+    });
   } else {
-    $.redirect("nota_tempo.php", { id_sales: idjual, duplikasi: 1 }, 'POST', '_blank');
+    $.redirect("nota_tempo.php", {id_sales: idjual, duplikasi: 1}, 'POST', '_blank');
   }
 });
 
 //
-$(document).on("click", "#btncancel", function() {
+$(document).on("click", "#btncancel", function () {
   swal({
       title: "Reset",
       text: "Empty transaction ?",
@@ -480,19 +496,19 @@ $(document).on("click", "#btncancel", function() {
       confirmButtonText: "Reset",
       closeOnConfirm: true
     },
-    function() {
+    function () {
       reset_data();
     });
 });
 
 //
-$(document).on("click", "#btnopentransaction", function() {
+$(document).on("click", "#btnopentransaction", function () {
   $("#modallasttrans").modal("show");
   $("#table_last_transaction tbody").html("");
 });
 
 //
-$(document).on("click", "#btnfiltersale", function() {
+$(document).on("click", "#btnfiltersale", function () {
   var first = $("#txtfirstperiod").val();
   var last = $("#txtlastperiod").val();
   var value = {
@@ -504,12 +520,12 @@ $(document).on("click", "#btnfiltersale", function() {
     url: "c_pos.php",
     type: "POST",
     data: value,
-    success: function(data, textStatus, jqXHR) {
-      var data = jQuery.parseJSON(data);
+    success: function (data, textStatus, jqXHR) {
+      data = jQuery.parseJSON(data);
       $("#table_last_transaction tbody").html(data.hasil);
     },
-    error: function(jqXHR, textStatus, errorThrown) {
-
+    error: function (jqXHR, textStatus, errorThrown) {
+      //
     }
   });
 });
@@ -530,22 +546,22 @@ function init_data() {
     "pageLength": 50,
     "dom": '<"top"f>rtip',
     "columnDefs": [
-      { className: "textright", "targets": [3, 4, 5, 6] }
+      {className: "textright", "targets": [3, 4, 5, 6]}
     ],
     "ajax": {
       "url": "c_pos.php",
       "type": "POST",
-      "data": value,
+      "data": value
     },
     "columns": [
-      { "data": "urutan" },
-      { "data": "id_item" },
-      { "data": "item_name" },
-      { "data": "price" },
-      { "data": "qty" },
-      { "data": "discprc" },
-      { "data": "subtotal" },
-      { "data": "button" },
+      {"data": "urutan"},
+      {"data": "id_item"},
+      {"data": "item_name"},
+      {"data": "price"},
+      {"data": "qty"},
+      {"data": "discprc"},
+      {"data": "subtotal"},
+      {"data": "button"}
     ]
   });
   $("#txttotaldiscprc").val(0);
@@ -558,11 +574,11 @@ function init_data() {
 }
 
 // Inicialização
-$(document).ready(function() {
+$(document).ready(function () {
 
   //
   $('#txtsalesdate,#txtfirstperiod,#txtlastperiod').datepicker({
-    format: 'dd-mm-yyyy',
+    format: 'dd-mm-yyyy'
   });
 
   //
@@ -575,7 +591,7 @@ $(document).ready(function() {
 
   //
   $('.modal').on('show.bs.modal', reposition);
-  $(window).on('resize', function() {
+  $(window).on('resize', function () {
     $('.modal:visible').each(reposition);
   });
 
@@ -587,17 +603,21 @@ $(document).ready(function() {
   init_data();
 
   $("#txtsearchitem").autocomplete({
-    search: function() { $(this).addClass('working'); },
-    open: function() { $(this).removeClass('working'); },
-    source: function(request, response) {
-      $.getJSON("autocomplete_item.php", { term: $('#txtsearchitem').val() },
+    search: function () {
+      $(this).addClass('working');
+    },
+    open: function () {
+      $(this).removeClass('working');
+    },
+    source: function (request, response) {
+      $.getJSON("autocomplete_item.php", {term: $('#txtsearchitem').val()},
         response);
     },
     minLength: 1,
-    select: function(event, ui) {
+    select: function (event, ui) {
       temptabel(ui.item.id_item);
     }
-  }).autocomplete("instance")._renderItem = function(ul, item) {
+  }).autocomplete("instance")._renderItem = function (ul, item) {
     return $("<li>")
       .append("<dl><dt>" + item.label + "</dt>" + item.price + item.note + "</dl>")
       .appendTo(ul);

@@ -55,11 +55,14 @@
       </div>
     </div><!-- /.login-box-body -->
   </div><!-- /.login-box -->
+
   <center><p>Copyright &copy; <?php echo date("Y"); ?> Seegatesite.com., inc. All rights reserved</p></center>
+
   <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
   <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="../../plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
   <script src="../../dist/js/myfunction.js" type="text/javascript"></script>
   <script src="../../dist/js/sweetalert.min.js" type="text/javascript"></script>
-</body>
+
+  </body>
 </html>
