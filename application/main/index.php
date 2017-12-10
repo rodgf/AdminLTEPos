@@ -5,25 +5,26 @@
   require_once("../model/pos.php");
   include "../layout /top-header.php"; 
   include "../../library /check_login.php";
-
   include "../layout/header.php"; 
 ?>
+
 <section style="margin-bottom:10px;" class="content-header">
 	<h1>
 		Dashboard
 		<small>Page</small>
 	</h1>
 </section>
+
 <section class="content-main">
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box box-solid box-danger">
 				<?php
-				$pos = new pos();
-				$toko = $pos->getrefsytem();
-				$nameshop = $toko[1]['name_shop'];
-				$address_shop = $toko[1]['address_shop'];
-				$phoneshop = $toko[1]['phone_shop'];
+					$pos = new pos();
+					$toko = $pos->getrefsytem();
+					$nameshop = $toko[1]['name_shop'];
+					$address_shop = $toko[1]['address_shop'];
+					$phoneshop = $toko[1]['phone_shop'];
 				?>
 				<div class="box-header">
 					<h1 class="box-title"><?php echo $nameshop;?></h1>
@@ -65,9 +66,7 @@
 							</table>
 						</div>				
 					</div>
-
 				</div>
-
 			</div>
 		</div>
 
@@ -111,7 +110,7 @@
 				type: "POST",
 				data : value,
 				success: function(data, textStatus, jqXHR){
-					var data = jQuery.parseJSON(data);
+					data = jQuery.parseJSON(data);
 					$("#table_search tbody").html(data.data)
 				},
 				error: function(jqXHR, textStatus, errorThrown) {

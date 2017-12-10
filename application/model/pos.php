@@ -340,5 +340,346 @@
 
     /*******************************************************************************
     END OF TABEL M_Item
-    *******************************************************************************/}
+    *******************************************************************************/
+
+    //
+    public function resetTempSaleByUserSession($iduser, $uniqid) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("delete from temp_sale where id_user = :id and uniqid = :uniqid");
+        $stmt->bindParam("id", $iduser);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = "Success Delete!";
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function getListTempSale($cashier, $uniqid) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("SELECT @rownum := @rownum + 1 AS urutan,t.*
+          FROM temp_sale t,
+          (SELECT @rownum := 0) r where t.id_user= :cashier and t.uniqid= :uniqid  ORDER BY input_date ASC");
+        $stmt->bindParam("cashier", $cashier);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function deleteTempSaleProduct($cashier, $uniqid, $id_item) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("delete from temp_sale where id_user = :id and uniqid = :uniqid and id_item = :id_item ");
+        $stmt->bindParam("id", $cashier);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->bindParam("id_item", $id_item);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = "Success Delete!";
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function updateTempSale($cashier, $uniqid, $id_item) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("update temp_sale set qty=qty+1 where uniqid= :uniqid and id_user = :cashier
+          and id_item = :id_item ");
+
+        $stmt->bindParam("cashier", $cashier);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->bindParam("id_item", $id_item);
+
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = "Success Edit!";
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function updateTempSaleHargaSale($cashier, $uniqid, $id_item, $value) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("update temp_sale set price = :value
+          where uniqid= :uniqid and id_user = :cashier
+          and id_item = :id_item ");
+
+        $stmt->bindParam("cashier", $cashier);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->bindParam("id_item", $id_item);
+        $stmt->bindParam("value", $value);
+
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = "Sukses Ubah!";
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function updateTempSaleQty($cashier, $uniqid, $id_item, $value) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("update temp_sale set qty= :value where uniqid= :uniqid and id_user = :cashier
+          and id_item = :id_item ");
+
+        $stmt->bindParam("cashier", $cashier);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->bindParam("id_item", $id_item);
+        $stmt->bindParam("value", $value);
+
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = "Success Edit!";
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function deleteSale($sale_id, $note) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("call deleteSale(:id,:note)");
+        $stmt->bindParam("id", $sale_id);
+        $stmt->bindParam("note", $note);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = 'Success Delete';
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function updateTempSaleDisc($cashier, $uniqid, $id_item, $value) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("update temp_sale set discprc = :value
+          where uniqid= :uniqid and id_user = :cashier
+          and id_item = :id_item ");
+
+        $stmt->bindParam("cashier", $cashier);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->bindParam("id_item", $id_item);
+        $stmt->bindParam("value", $value);
+
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = "Success Edit!";
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function saveTempSale($cashier, $uniqid, $id_item, $unit, $item_name, $qty, $price, $discprn, $discrp) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("insert into temp_sale(id_user, uniqid, id_item, item_name, qty, unit, price, discprc, discrp)
+          values(:cashier , :uniqid , :id_item, :item_name, :qty, :unit, :price, :discprn, :discrp)");
+        $stmt->bindParam("cashier", $cashier);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->bindParam("id_item", $id_item);
+        $stmt->bindParam("unit", $unit);
+        $stmt->bindParam("item_name", $item_name);
+        $stmt->bindParam("qty", $qty);
+        $stmt->bindParam("price", $price);
+        $stmt->bindParam("discprn", $discprn);
+        $stmt->bindParam("discrp", $discrp);
+
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = "Success save!";
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function saveSale($sale_id, $sale_date, $paid, $disc_prcn, $disc_rp, $uniqid, $id_user, $note) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("call saveSale( :sale_id, :sale_date, :paid, :disc_prcn,
+          :disc_rp, :uniqid, :id_user, :note)");
+        $stmt->bindParam("sale_id", $sale_id);
+        $stmt->bindParam("sale_date", $sale_date);
+        $stmt->bindParam("paid", $paid);
+        $stmt->bindParam("disc_prcn", $disc_prcn);
+        $stmt->bindParam("disc_rp", $disc_rp);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->bindParam("id_user", $id_user);
+        $stmt->bindParam("note", $note);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = "Success Save!";
+        $stat[2] = $stmt->fetchColumn(0);
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function getSubTotalTempSale($cashier, $uniqid) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("SELECT SUM((price - (price*(discprc/100)))*qty)AS total
+          FROM temp_sale where uniqid= :uniqid and id_user = :cashier");
+        $stmt->bindParam("cashier", $cashier);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = $stmt->fetchColumn(0);
+        $stat[2] = $stmt->rowCount();
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function checkTempSale($cashier, $uniqid) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("SELECT id_user,uniqid FROM temp_sale where uniqid= :uniqid and id_user = :cashier");
+        $stmt->bindParam("cashier", $cashier);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = $stmt->rowCount();
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function getCheckProduk($cashier, $uniqid, $id_item) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("select * from temp_sale where uniqid= :uniqid and id_user = :cashier and id_item = :id_item");
+        $stmt->bindParam("cashier", $cashier);
+        $stmt->bindParam("uniqid", $uniqid);
+        $stmt->bindParam("id_item", $id_item);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = $stmt->rowCount();
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function getTransSale($awal, $akhir, $order = 'desc') {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("SELECT  a.`sale_date`,a.`sale_id`,
+          (SELECT SUM((d.price - (d.price*(d.disc_prc/100)))*d.qty) AS total
+          FROM t_sale_detail d WHERE d.sale_id = a.sale_id)AS total,
+          c.`username`,a.sts,a.paid,a.disc_rp
+          FROM t_sale a
+          INNER JOIN m_user c ON a.`id_user` = c.`id_user`
+          where (a.`sale_date` BETWEEN :awal AND :akhir)
+          ORDER BY sale_id " . $order);
+        $stmt->bindParam("awal", $awal);
+        $stmt->bindParam("akhir", $akhir);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
+    public function getSaleId($id) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("SELECT a.* ,c.`username`
+          FROM t_sale a
+          INNER JOIN m_user c ON a.`id_user` = c.`id_user` where a.sale_id = :id");
+        $stmt->bindParam("id", $id);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    public function getSaleDetailIdSale($id) {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("SELECT @rownum := @rownum + 1 AS urutan, a.*,
+          (a.price - ((a.price * a.disc_prc) /100) ) * a.qty as total
+          from t_sale_detail a,(SELECT @rownum := 0) r  where a.sale_id = :id");
+        $stmt->bindParam("id", $id);
+        $stmt->execute();
+        $stat[0] = true;
+        $stat[1] = $stmt->fetchall(PDO::FETCH_ASSOC);
+        return $stat;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+  }
 ?>

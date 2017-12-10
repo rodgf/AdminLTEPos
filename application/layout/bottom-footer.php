@@ -1,5 +1,5 @@
 
-  <script src="../..//bower_components/jquery/dist/jQuery.min.js"></script>
+  <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
   <script src="../../plugins/jQueryUI/jquery-ui.min.js"></script>
   <script>
     $.widget.bridge('uibutton', $.ui.button);
@@ -17,5 +17,4 @@
   <script src="../../dist/js/session_checker.js" type="text/javascript"></script>
   <script src="../../dist/js/hotkey.js"></script>
   <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="../../dist/js/dataTables.bootstrap.min.js"></script>
   <script src="../../dist/js/dataTables.responsive.min.js"></script>
