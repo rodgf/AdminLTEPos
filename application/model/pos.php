@@ -663,6 +663,21 @@
     }
 
     //
+    public function getSalesId() {
+      $db = $this->dblocal;
+      try {
+        $stmt = $db->prepare("SELECT sale_id
+          FROM t_sale");
+        $stmt->execute();
+        return $stmt;
+      } catch (PDOException $ex) {
+        $stat[0] = false;
+        $stat[1] = $ex->getMessage();
+        return $stat;
+      }
+    }
+
+    //
     public function getSaleId($id) {
       $db = $this->dblocal;
       try {
